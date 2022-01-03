@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1641214830 source:c:\users\felix\onedrive - universität zürich uzh\privat\informatik_2_vorbereitung\code_blocks_projects\project10_guessing_game\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
