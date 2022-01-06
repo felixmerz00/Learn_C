@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1641470657 source:c:\users\felix\onedrive - universität zürich uzh\privat\informatik_2_vorbereitung\code_blocks_projects\project14_tictactoe\main.c
+	<stdio.h>
+	<stdlib.h>
+
