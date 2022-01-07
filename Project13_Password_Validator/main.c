@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 
-const char* generate_password(int length, int num_sign_class);
+const char* generate_password(int length);
 int calculate_Security(const char* password);
 char get_random_letter(int letter_class);
 
@@ -18,27 +18,24 @@ int main()
     int security_level;
     printf("Enter your password: \n");
     scanf("%s", password);
-    printf("The entered password is: %s\n", password);
+    printf("The entered password is: %s\n\n", password);
 
-    /*security_level = calculate_Security(password);*/
+    security_level = calculate_Security(password);
 
-    /*Print security level.*/
+    /*Print security level and recommend a strong password, if the entered password is weak or medium.*/
     if(security_level == 1){
-        printf("The entered password is weak.\n");
+        printf("\nThe entered password is weak.\n");
+        char * p = generate_password(16);
+        printf("Better password: %s\n", p);
     }
     else if(security_level == 2){
-        printf("The entered password has medium strength.\n");
+        printf("\nThe entered password has medium strength.\n");
+        char * p = generate_password(16);
+        printf("Better password: %s\n", p);
     }
     else if(security_level == 3){
-        printf("The entered password is strong.\n");
+        printf("\nThe entered password is strong.\n");
     }
-
-
-    /*Recommend a better alternative for weak (-> medium alternative) and medium (-> strong alternative) passwords.
-    Password generation*/
-    /*better_password = generate_password(16, 4);
-    printf("The better password is %s: ", better_password);*/
-    printf("Better password: %s", generate_password(16, 4));
 
     return 0;
 }
@@ -90,17 +87,15 @@ int calculate_Security(const char* password){
     return security;
 }
 
-const char* generate_password(int length, int num_sign_class){
-    char password[20] = "";
+const char* generate_password(int length){
+    static char new_password[20] = "";
     srand(time(NULL));
     for(int i = 0; i < length; i++){
         char a = get_random_letter(rand()%4 + 1);
         /*char a = rand() % (122 + 1 - 97) + 97;*/
-        strncat(password, &a, 1);
-        printf("%s\n", password);
+        strncat(new_password, &a, 1);
     }
-    char *s = password;
-    return s;
+    return new_password;
 }
 
 char get_random_letter(int letter_class){
