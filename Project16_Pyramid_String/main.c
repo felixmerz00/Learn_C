@@ -6,30 +6,40 @@ void generate_pyramid(int height);
 
 int main()
 {
-    generate_pyramid(5);
+    generate_pyramid(9);
     return 0;
 }
 
+/*creates a pyramid string, maximum pyramid height is 9*/
 void generate_pyramid(int height)
 {
     int h = height;
-    /*char *pLine2;
-    pLine2 = generate_line(9);
-    printf("%s\n", pLine2);*/
 
     /*create a string that collects all the lines*/
+    int size = pow(h,2)*2;
+    char pyramid[size];
+    pyramid[0]='\0';
 
-    for(int i = 1; i <= height; i++){
+    /*loop for the upper half of the pyramid*/
+    for(int i = 1; i <= h; i++){
         char *pLine;
         pLine = generate_line(i);
-        printf("%s\n", pLine);
+        strncat(pyramid, pLine, h*2);
     }
 
-    /*make a loop for the lower half of the pyramid*/
+    /*loop for the lower half of the pyramid*/
+    for(int i = h-1; i > 0; i--){
+        char *pLine;
+        pLine = generate_line(i);
+        strncat(pyramid, pLine, h*2);
+    }
+    printf("%s\n", pyramid);
 
 }
 
-/*takes the last integer of the line as input parameter and returns a pointer to the string containing the line*/
+/*create a string in the form of:
+"1*2*3*...*number_of_ints\n\0"
+and return its pointer*/
 char * generate_line(int number_of_ints)
 {
     char s[number_of_ints*2+1];
@@ -42,15 +52,17 @@ char * generate_line(int number_of_ints)
     }
     int length = strlen(s);
     char *pS_out;
-    pS_out = (char *) malloc(length*sizeof(char));
+    pS_out = (char *) malloc(length*sizeof(char)+1);
     pS_out[0] = '\0';
     if(number_of_ints > 1){
         strncpy(pS_out, s, length-1);
-        pS_out[length-1] = '\0';
+        pS_out[length-1] = '\n';
+        pS_out[length] = '\0';
     }
     else{
         strncpy(pS_out, s, length);
-        pS_out[length] = '\0';
+        pS_out[length] = '\n';
+        pS_out[length+1] = '\0';
     }
     return pS_out;
 }
